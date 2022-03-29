@@ -49,6 +49,8 @@ class Settings:
         """
         Constructor.
         """
+        # FIXME add keys/fields
+
         self.allow_duplicate_hostnames = False
         self.allow_duplicate_ips = False
         self.allow_duplicate_macs = False
@@ -298,7 +300,7 @@ def validate_settings(settings_content: dict) -> dict:
     return migrations.normalize(settings_content)
 
 
-def read_yaml_file(filepath="/ect/cobbler/settings.yaml") -> Dict[Hashable, Any]:
+def read_yaml_file(filepath="/etc/cobbler/settings.yaml") -> Dict[Hashable, Any]:
     """
     Reads settings files from ``filepath`` and all paths in `include` (which is read from the settings file) and saves
     the content in a dictionary.
@@ -316,11 +318,6 @@ def read_yaml_file(filepath="/ect/cobbler/settings.yaml") -> Dict[Hashable, Any]
     try:
         with open(filepath) as main_settingsfile:
             filecontent = yaml.safe_load(main_settingsfile.read())
-
-            for ival in filecontent.get("include", []):
-                for ifile in glob.glob(ival):
-                    with open(ifile, "r") as extra_settingsfile:
-                        filecontent.update(yaml.safe_load(extra_settingsfile.read()))
     except yaml.YAMLError as error:
         traceback.print_exc()
         raise yaml.YAMLError('"%s" is not a valid YAML file' % filepath) from error

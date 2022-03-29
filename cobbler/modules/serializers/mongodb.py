@@ -44,6 +44,8 @@ def __connect(configfile: str = "/etc/cobbler/mongodb.conf"):
     """
     Reads the config file for mongodb and then connects to the mongodb.
     """
+    # FIXME exchange mongodb.conf with settings
+
     if not pathlib.Path(configfile).is_file():
         raise FileNotFoundError(
             "Specified Cobbler MongoDB config file could not be found!"
