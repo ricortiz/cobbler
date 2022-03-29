@@ -254,6 +254,46 @@ schema = Schema(
         Optional("windows_enabled", default=False): bool,
         Optional("windows_template_dir", default="/etc/cobbler/windows"): str,
         Optional("samba_distro_share", default="DISTRO"): str,
+        Optional("mongodb", default={"host": "localhost", "port": 27017}): {
+            Optional("host", default="localhost"): str,
+            Optional("port", default=27017): int,
+        },
+        Optional(
+            "modules",
+            default={
+                "authentication": {
+                    "module": "authentication.configfile",
+                    "hash_algorithm": "sha3_512",
+                },
+                "authorization": {"module": "authorization.allowall"},
+                "dns": {"module": "manager.bind"},
+                "dhcp": {"module": "managers.isc"},
+                "tftpd": {"module": "managers.in_tftpd"},
+            },
+        ): {
+            Optional(
+                "authentication",
+                default={
+                    "module": "authentication.configfile",
+                    "hash_algorithm": "sha3_512",
+                },
+            ): {
+                Optional("module", default="authentication.configfile"): str,
+                Optional("hash_algorithm", default="sha3_512"): str,
+            },
+            Optional("authorization", default={"module": "authorization.allowall"}): {
+                Optional("module", default="authorization.allowall"): str
+            },
+            Optional("dns", default={"module": "manager.bind"}): {
+                Optional("module", default="manager.bind"): str
+            },
+            Optional("dhcp", default={"module": "managers.isc"}): {
+                Optional("module", default="managers.isc"): str
+            },
+            Optional("tftpd", default={"module": "managers.in_tftpd"}): {
+                Optional("module", default="managers.in_tftpd"): str
+            },
+        },
     },
     ignore_extra_keys=False,
 )
