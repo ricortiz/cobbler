@@ -97,7 +97,6 @@ class Settings:
         self.enable_ipxe = False
         self.enable_menu = True
         self.http_port = 80
-        self.include = ["/etc/cobbler/settings.d/*.settings"]
         self.iso_template_dir = "/etc/cobbler/iso"
         self.jinja2_includedir = "/var/lib/cobbler/jinja2"
         self.kernel_options = {}
@@ -304,9 +303,7 @@ def validate_settings(settings_content: dict) -> dict:
 
 def read_yaml_file(filepath="/etc/cobbler/settings.yaml") -> Dict[Hashable, Any]:
     """
-    Reads settings files from ``filepath`` and all paths in `include` (which is read from the settings file) and saves
-    the content in a dictionary.
-    Any key may be overwritten in a later loaded settings file. The last loaded file wins.
+    Reads settings files from ``filepath`` and saves the content in a dictionary.
 
     :param filepath: Settings file path, defaults to "/ect/cobbler/settings.yaml"
     :raises FileNotFoundError: In case file does not exist or is a directory.

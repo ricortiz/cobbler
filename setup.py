@@ -568,6 +568,7 @@ if __name__ == "__main__":
         },
         configure_files=[
             "cobbler/settings/migrations/V3_3_1.py",
+            "cobbler/settings/migrations/V3_4_0.py",
             "config/apache/cobbler.conf",
             "config/cobbler/settings.yaml",
             "config/service/cobblerd.service",
@@ -597,7 +598,6 @@ if __name__ == "__main__":
                     "build/config/cobbler/settings.yaml",
                 ],
             ),
-            ("%s/settings.d" % etcpath, glob("config/cobbler/settings.d/*")),
             (
                 "%s" % etcpath,
                 [
