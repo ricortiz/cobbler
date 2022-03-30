@@ -269,6 +269,7 @@ schema = Schema(
                 "dns": {"module": "manager.bind"},
                 "dhcp": {"module": "managers.isc"},
                 "tftpd": {"module": "managers.in_tftpd"},
+                "serializers": {"module": "serializers.file"},
             },
         ): {
             Optional(
@@ -292,6 +293,9 @@ schema = Schema(
             },
             Optional("tftpd", default={"module": "managers.in_tftpd"}): {
                 Optional("module", default="managers.in_tftpd"): str
+            },
+            Optional("serializers", default={"module": "serializers.file"}): {
+                Optional("module", default="serializers.file"): str
             },
         },
     },
