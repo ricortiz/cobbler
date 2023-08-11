@@ -126,7 +126,7 @@ class _ImportSignatureManager(ManagerModule):
                 return utils.subprocess_get(cmd).splitlines()
 
             self.logger.info("no %s found, please install wimlib-utils", cmd)
-        elif ftype.mime_type == "text/plain":  # type: ignore
+        elif ftype.mime_type == "text/plain" or ftype.mime_type == "text/x-shellscript":  # type: ignore
             with open(filename, "r", encoding="UTF-8") as file_fd:
                 return file_fd.readlines()
         else:
